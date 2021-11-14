@@ -204,7 +204,7 @@ img {
 
 .btn-dark {
   width: 3rem;
-  margin-left: 2rem;
+  margin-right: 2rem;
   cursor: pointer;
   background: url(./theme.png) left / auto 3rem no-repeat;
   transition: background-position 0.4s steps(5);
