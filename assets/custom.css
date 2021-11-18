@@ -1,1 +1,4 @@
-/* Place custom css here. */
+/* xkcd dark mode is here!! */
+body.dark .post-content img[src*="imgs.xkcd.com"] {
+    filter: invert(0.913);
+}
