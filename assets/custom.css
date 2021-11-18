@@ -1,4 +1,11 @@
+/**
+ * Modified by @themisir
+ */
+
 /* xkcd dark mode is here!! */
+.post-content img[src*="imgs.xkcd.com"] {
+  transition: filter .4s ease-out;
+}
 body.dark .post-content img[src*="imgs.xkcd.com"] {
-    filter: invert(0.913);
+  filter: invert(0.913);
 }
