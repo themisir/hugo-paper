@@ -2,10 +2,12 @@
  * Modified by @themisir
  */
 
-/* xkcd dark mode is here!! */
-.post-content img[src*="imgs.xkcd.com"] {
-  transition: filter .4s ease-out;
+/* Invert blac&white images on dark mode */
+.post-content img[src*="imgs.xkcd.com"],
+.post-content img[src*="#invert"] {
+  transition: filter .4s ease-out
 }
-body.dark .post-content img[src*="imgs.xkcd.com"] {
-  filter: invert(0.913);
+body.dark .post-content img[src*="imgs.xkcd.com"],
+body.dark .post-content img[src*="#invert"] {
+  filter: invert(.913)
 }
