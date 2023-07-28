@@ -42,9 +42,9 @@
     <a
       class="{{ . }}"
       style="--url: url(./{{ . }}.svg)"
-      href="https://{{ . }}.com/{{ site.Params.Get . }}"
+      href="{{ site.Params.Get . }}"
       target="_blank"
-      rel="noopener"
+      rel="me noopener"
     ></a>
     {{ end }}
   </nav>
