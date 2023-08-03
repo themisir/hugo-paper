@@ -37,27 +37,18 @@
 {{ end }}
 
 {{ define "scripts" }}
-<link rel="preload stylesheet" as="style" href="/justifiedGallery/justifiedGallery.min.css" />
-<link rel="preload stylesheet" as="style" href="/lightGallery/css/lightgallery-bundle.min.css" />
-<script src="/lightGallery/lightgallery.min.js"></script>
-<script src="/lightGallery/plugins/lg-zoom.min.js"></script>
-<script src="/jquery.min.js"></script>
-<script src="/justifiedGallery/jquery.justifiedGallery.min.js"></script>
+{{ $justifiedgallery_css := resources.Get "plugins/justifiedGallery.min.css" }}
+{{ $css := slice $justifiedgallery_css | resources.Concat "gallery.min.css" | minify }}
+<link rel="preload stylesheet" as="style" href="{{ $css.Permalink }}" />
 
-<style>
-main {
-  max-width: var(--wide) !important;
-}
-</style>
-<script>
-  const gallery = document.getElementById('gallery');
-  $(gallery).justifiedGallery({
-    rowHeight: 250,
-    margins: 5
-  }).on('jg.complete', function() {
-      lightGallery(gallery, {
-        plugins: [lgZoom],
-      });
-  });
-</script>
+<link rel="preload stylesheet" as="style" href="/lightGallery/css/lightgallery-bundle.min.css" />
+
+{{ $jquery_js := resources.Get "plugins/jquery.min.js" }}
+{{ $justifiedgallery_js := resources.Get "plugins/jquery.justifiedGallery.min.js" }}
+{{ $lightgallery_js := resources.Get "plugins/lightgallery.min.js" }}
+{{ $lgzoom_js := resources.Get "plugins/lg-zoom.min.js" }}
+{{ $gallery_js := resources.Get "gallery.js" }}
+{{ $js := slice $jquery_js $justifiedgallery_js $lightgallery_js $lgzoom_js $gallery_js | resources.Concat "gallery.min.js" | minify }}
+<script src="{{ $js.Permalink }}"></script>
+
 {{ end }}
