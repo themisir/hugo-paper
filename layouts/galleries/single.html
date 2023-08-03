@@ -16,9 +16,8 @@
   <section class="post-gallery">
     <div id="gallery">
       {{ range .Params.images }}
-      {{ $image := resources.GetRemote .url }}
-      {{ $thumb := $image.Resize "x600" }}
-      <a href="{{ $image.RelPermalink }}">
+      {{ $thumb := (resources.GetRemote .url).Resize "x600" }}
+      <a href="{{ .url }}">
         <img src="{{ $thumb.RelPermalink }}" alt="{{ .title }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" />
       </a>
       {{ end }}
