@@ -1,0 +1,63 @@
+{{ define "main" }}
+<article class="post-single">
+  <header class="post-title">
+    <p>
+      {{ if .Date }}
+      <time>{{ .Date | time.Format ":date_medium" }}</time>
+      {{ end }}
+      {{ if or .Params.Author site.Author.name }}
+      <span>{{ .Params.Author | default site.Author.name }}</span>
+      {{ end }}
+    </p>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+  </header>
+  {{ if .Content }}<section class="post-content">{{ .Content }}</section>{{ end }}
+  <section class="post-gallery">
+    <div id="gallery">
+      {{ range .Params.images }}
+      {{ $image := resources.GetRemote .url }}
+      {{ $thumb := $image.Resize "x600" }}
+      <a href="{{ $image.RelPermalink }}">
+        <img src="{{ $thumb.RelPermalink }}" alt="{{ .title }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" />
+      </a>
+      {{ end }}
+    </div>
+  </section>
+
+  <!-- Post Tags -->
+  {{ if .Params.tags }}
+  <footer class="post-tags">
+    {{ range .Params.tags }} {{ $href := print (absURL "tags/") (urlize .) }}
+    <a href="{{ $href }}">{{ . }}</a>
+    {{ end }}
+  </footer>
+  {{ end }}
+</article>
+{{ end }}
+
+{{ define "scripts" }}
+<link rel="preload stylesheet" as="style" href="/justifiedGallery/justifiedGallery.min.css" />
+<link rel="preload stylesheet" as="style" href="/lightGallery/css/lightgallery-bundle.min.css" />
+<script src="/lightGallery/lightgallery.min.js"></script>
+<script src="/lightGallery/plugins/lg-zoom.min.js"></script>
+<script src="/jquery.min.js"></script>
+<script src="/justifiedGallery/jquery.justifiedGallery.min.js"></script>
+
+<style>
+main {
+  max-width: var(--wide) !important;
+}
+</style>
+<script>
+  const gallery = document.getElementById('gallery');
+  $(gallery).justifiedGallery({
+    rowHeight: 250,
+    margins: 5
+  }).on('jg.complete', function() {
+      lightGallery(gallery, {
+        plugins: [lgZoom],
+      });
+  });
+</script>
+{{ end }}
