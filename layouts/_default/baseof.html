@@ -11,7 +11,7 @@
 <html lang="{{ site.LanguageCode }}">
   {{ partial "head.html" . }}
 
-  <body class="not-ready" data-menu="{{ isset site.Menus `main` }}">
+  <body class="not-ready page-{{ .Type }}{{ if .BundleType }}-{{ .BundleType }}{{ end }}" data-menu="{{ isset site.Menus `main` }}">
     {{ partial "header.html" . }}
 
     <main class="main">{{ block "main" . }}{{ end }}</main>
@@ -19,5 +19,6 @@
     <script src="/favicon.js"></script>
 
     {{ partial "footer.html" . }}
+    {{ block "scripts" . }}{{ end }}
   </body>
 </html>
